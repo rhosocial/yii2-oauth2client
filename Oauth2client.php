@@ -15,9 +15,16 @@ namespace rhosocial\Oauth2client;
 use Yii;
 use yii\authclient\OAuth2;
 /**
- * Description of Oauth2client
- *
- * @author vistart
+ * Rho Social OAuth 2 Client for Yii 2 Applications.
+ * Now we have suuported the following API:
+ * @property string $userId Get the User's ID uniquely in your client.
+ * 
+ * The format of response data is JSON string. It includes the following 
+ * members:
+ * success: Whether the just request succeeds;
+ * data: The wanted contents if request succeeded, or the error messages if not.
+ * Please see the detail of each API note.
+ * @author vistart <i@vistart.name>
  */
 class Oauth2client extends OAuth2 
 {
@@ -33,7 +40,7 @@ class Oauth2client extends OAuth2
         $params = $_GET;
         unset($params['code']);
         unset($params['state']);
-        $params[0] = Yii::$app->controller->getRoute();
+        $params[0] = Yii::$app->controller->route;
         if (strpos(Yii::$app->urlManager->hostInfo, 'localhost') !== false){
             Yii::$app->urlManager->hostInfo = str_replace('localhost', '127.0.0.1', Yii::$app->urlManager->hostInfo);
         }
@@ -80,11 +87,25 @@ class Oauth2client extends OAuth2
         return $token;
     }
     
+    /**
+     * Get the User's ID uniquely in your client.
+     * This request only receive the POST method.
+     * the succeeded request will get the response content that only includes
+     * the User's ID.
+     * 
+     * @return string User's ID.
+     */
     public function getUserId()
     {
-        return $this->api('user', 'POST', ['client_id' => $this->clientId])['data']['user_id'];
+        $data = $this->initUserAttributes();
+        return $data['user_id'];
     }
     
+    /**
+     * The api method will automatically attach the access_token property.
+     * The job you need to do is providing your own parameter(s).
+     * @return type
+     */
     protected function initUserAttributes()
     {
         return $this->api('user', 'POST', ['client_id' => $this->clientId])['data'];

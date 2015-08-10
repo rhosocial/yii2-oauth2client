@@ -12,7 +12,6 @@
 
 namespace rhosocial\Oauth2client;
 
-use yii\authclient\AuthAction;
 use yii\base\NotSupportedException;
 use yii\web\Response;
 
@@ -51,7 +50,7 @@ use yii\web\Response;
  *
  * @author vistart <i@vistart.name>
  */
-class AuthAction extends AuthAction 
+class AuthAction extends \yii\authclient\AuthAction 
 {
     /**
      * @param mixed $client auth client instance.
@@ -60,7 +59,7 @@ class AuthAction extends AuthAction
      */
     protected function auth($client)
     {
-        if ($client instanceof auth2client){
+        if ($client instanceof Oauth2client){
             return $this->authOAuth2($client);
         } else {
             throw new NotSupportedException('Provider "' . get_class($client) . '" is not supported.');
