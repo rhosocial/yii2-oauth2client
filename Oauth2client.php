@@ -31,6 +31,7 @@ class Oauth2client extends OAuth2
     public $authUrl = 'https://rho.social/authorize';
     public $tokenUrl = 'https://api.rho.social/v1/token';
     public $apiBaseUrl = 'https://api.rho.social/v1';
+    public $clientName = '';
     /**
      * Composes default [[returnUrl]] value.
      * @return string return URL.
@@ -46,6 +47,12 @@ class Oauth2client extends OAuth2
         }
         $url = Yii::$app->getUrlManager()->createAbsoluteUrl($params);
         return $url;
+    }
+    
+    protected function defaultCurlOptions() {
+        $curl_options = parent::defaultCurlOptions();
+        $curl_options[CURLOPT_USERAGENT] = (empty($this->clientName) ? (empty(Yii::$app->name) ? Yii::$app->id : Yii::$app->name) : $this->clientName) . ' OAuth 2.0 Client';
+        return $curl_options;
     }
     
     protected function defaultName()
