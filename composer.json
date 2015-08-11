@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "rhosocial\\oauth2client\\": ""
+            "rhosocial\\Oauth2client\\": ""
         }
     },
     "repositories":[
