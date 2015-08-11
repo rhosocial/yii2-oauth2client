@@ -65,7 +65,7 @@ Attach the following code to the `Component` setion of main configuration:
 ],
 ```
 
-Please replace the <client id> and <client secret> to those assigned for you.
+Please replace the `<client id>` and `<client secret>` to those assigned for you.
 
 Then use the AuthChoice Widget in your login view, insert the following code 
 to that you want:
