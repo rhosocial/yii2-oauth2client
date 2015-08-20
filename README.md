@@ -78,4 +78,4 @@ into where you want:
 ```
 
 If you didn't choose the 'site/auth' as your Auth Action, please modify the
-'baseAuthUrl' to the actual route.
+'baseAuthUrl' property to the actual route.
