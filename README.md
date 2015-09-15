@@ -2,6 +2,11 @@ Rho Social OAuth 2 Client for Yii 2 Web Applications.
 =====================================================
 
 [![Join the chat at https://gitter.im/rhosocial/yii2-oauth2client](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rhosocial/yii2-oauth2client?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+If you have any problems or good ideas about yii2-oauth2client, please discuss here, or send an email to opensource@dev.rho.social. Thank you!
+
+If you want to send an email with your issues, please briefly introduce yourself first, for instance including your title and github homepage.
+
 Rho Social OAuth 2 Client for Yii 2 Web Applications.
 This extension is currently under development. Please do not download, fork or
 use this extension if you didn't obtained the test invitation, and we temprarily
