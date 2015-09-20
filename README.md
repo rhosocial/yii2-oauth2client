@@ -51,7 +51,7 @@ class SiteController extends Controller
 }
 ```
 
-Attach the following code to the `Component` setion of main configuration:
+Attach the following code to the `Component` section of main configuration:
 
 ```php
 'authClientCollection' => [
