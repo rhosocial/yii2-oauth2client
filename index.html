@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>yii2-oauth2client by rhosocial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">yii2-oauth2client</h1>
+      <h2 class="project-tagline">Rho Social OAuth 2 Client for Yii 2 Web Applications.</h2>
+      <a href="https://github.com/rhosocial/yii2-oauth2client" class="btn">View on GitHub</a>
+      <a href="https://github.com/rhosocial/yii2-oauth2client/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/rhosocial/yii2-oauth2client/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="rho-social-oauth-2-client-for-yii-2-web-applications" class="anchor" href="#rho-social-oauth-2-client-for-yii-2-web-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rho Social OAuth 2 Client for Yii 2 Web Applications.</h1>
+
+<p>Rho Social OAuth 2 Client for Yii 2 Web Applications.
+This extension is currently under development. Please do not download, fork or
+use this extension if you didn't obtained the test invitation, and we temprarily
+do not accept the pull requests.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The preferred way to install this extension is through <a href="http://getcomposer.org/download/">composer</a>.</p>
+
+<p>Either run</p>
+
+<pre><code>php composer.phar require --prefer-dist rhosocial/yii2-oauth2client "*"
+</code></pre>
+
+<p>or add</p>
+
+<pre><code>"rhosocial/yii2-oauth2client": "*"
+</code></pre>
+
+<p>to the require section of your <code>composer.json</code> file.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Attach the Auth Action to Controller:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">SiteController</span> <span class="pl-k">extends</span> <span class="pl-e">Controller</span></span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">actions</span>()</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-k">return</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>auth<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>rhosocial\Oauth2Client\AuthAction<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>successCallback<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-smi">$this</span>, <span class="pl-s"><span class="pl-pds">'</span>onAuthSuccess<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">            ],</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">onAuthSuccess</span>(<span class="pl-smi">$client</span>)</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-smi">$attributes</span> <span class="pl-k">=</span> <span class="pl-smi">$client</span><span class="pl-k">-&gt;</span>getUserAttributes();</span>
+<span class="pl-s1">        <span class="pl-c">// user login or signup comes here</span></span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>Attach the following code to the <code>Component</code> section of main configuration:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-s"><span class="pl-pds">'</span>authClientCollection<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>yii\authclient\Collection<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>clients<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>rho_social<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>rhosocial\Oauth2client\Oauth2client<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>clientId<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-k">&lt;</span><span class="pl-c1">client</span> <span class="pl-c1">id</span><span class="pl-k">&gt;</span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>clientSecret<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-k">&lt;</span><span class="pl-c1">client</span> <span class="pl-c1">secret</span><span class="pl-k">&gt;</span>,</span>
+<span class="pl-s1">        ],</span>
+<span class="pl-s1">    ],</span>
+<span class="pl-s1">],</span></pre></div>
+
+<p>Please replace the <code>&lt;client id&gt;</code> and <code>&lt;client secret&gt;</code> with what assigned for you.</p>
+
+<p>Then use the AuthChoice Widget in your login view, insert the following code 
+into where you want:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">&lt;</span>?<span class="pl-k">=</span> <span class="pl-c1">yii\authclient\widgets\</span><span class="pl-c1">AuthChoice</span><span class="pl-k">::</span>widget([</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>baseAuthUrl<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>site/auth<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>popupMode<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span>,</span>
+<span class="pl-s1">]);</span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span></pre></div>
+
+<p>If you didn't choose the 'site/auth' as your Auth Action, please modify the
+'baseAuthUrl' property to the actual route.</p>
+
+<h2>
+<a id="contact-us" class="anchor" href="#contact-us" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact Us</h2>
+
+<p><a href="https://gitter.im/rhosocial/yii2-oauth2client?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/rhosocial/yii2-oauth2client"></a></p>
+
+<p>If you have any problems or good ideas about yii2-oauth2client, please discuss there, or send an email to <a href="mailto:opensource@dev.rho.social">opensource@dev.rho.social</a>. Thank you!</p>
+
+<p>If you want to send an email with your issues, please briefly introduce yourself first, for instance including your title and github homepage.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/rhosocial/yii2-oauth2client">yii2-oauth2client</a> is maintained by <a href="https://github.com/rhosocial">rhosocial</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
